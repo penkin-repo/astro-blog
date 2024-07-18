@@ -5,16 +5,15 @@ import type {CollectionEntry} from "astro:content";
 import SearchForm from "../../components/SearchForm.astro";
 import ArticleCard from "../../components/ArticleCard.astro";
 import BackToAllArticles from "../../components/BackToAllArticles.astro";
-import {capitalise} from "../../utils/utils";
 
-const query: string = Astro.url.searchParams.get('query');
+const query: string | null = Astro.url.searchParams.get('query');
 
 const allBlogArticles: CollectionEntry<'blog'>[] = (await getCollection('blog'));
 const allArticlesWithQuery: CollectionEntry<'blog'>[] = allBlogArticles.filter((article) => {
-    const TitleMatch = article.data.title.toLowerCase().includes(query.toLowerCase());
-    const BodyMatch = article.body.toLowerCase().includes(query.toLowerCase());
-    const SlugMatch = article.slug.toLowerCase().includes(query.toLowerCase());
-    const TagsMatch = article.data.tags.some((tag) => tag.toLowerCase().includes(query.toLowerCase()));
+    const TitleMatch = article.data.title.toLowerCase().includes(query!.toLowerCase());
+    const BodyMatch = article.body.toLowerCase().includes(query!.toLowerCase());
+    const SlugMatch = article.slug.toLowerCase().includes(query!.toLowerCase());
+    const TagsMatch = article.data.tags.some((tag) => tag.toLowerCase().includes(query!.toLowerCase()));
     return TitleMatch || BodyMatch || TagsMatch || SlugMatch;
 });
 ---

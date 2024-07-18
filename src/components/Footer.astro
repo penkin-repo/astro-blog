@@ -4,7 +4,7 @@ import type {CollectionEntry} from "astro:content";
 import {capitalise} from "../utils/utils";
 
 const allBlogArticles: CollectionEntry<'blog'>[] = (await getCollection('blog'));
-const allTagsUnique: string[] = [...new Set(allBlogArticles.flatMap((article: string) => article.data.tags))];
+const allTagsUnique: string[] = [...new Set(allBlogArticles.flatMap((article: any) => article.data.tags))];
 
 ---
 
