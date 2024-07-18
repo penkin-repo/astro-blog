@@ -1,0 +1,15 @@
+---
+import LogoMain from "./LogoMain.astro";
+import NavbarList from "./NavbarList.astro";
+import NavbarBurger from "./NavbarBurger.astro";
+---
+
+<nav class="bg-gray-900 text-white">
+    <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+        <LogoMain/>
+        <NavbarBurger/>
+        <div class="hidden w-full md:block md:w-auto" id="navbar-default">
+            <NavbarList/>
+        </div>
+    </div>
+</nav>

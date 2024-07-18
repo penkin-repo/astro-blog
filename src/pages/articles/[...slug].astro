@@ -1,0 +1,46 @@
+---
+import MainLayout from "../../layouts/MainLayout.astro";
+import {getEntry} from "astro:content";
+import {formatDate} from "../../utils/utils";
+import Tags from "../../components/Tags.astro";
+import ImageDinamic from "../../components/ImageDinamic.astro";
+import BackToAllArticles from "../../components/BackToAllArticles.astro";
+
+const {slug} = Astro.params;
+
+if (slug === undefined) {
+    throw new Error("No slug provided");
+}
+
+const entry = await getEntry("blog", slug);
+
+if (entry === undefined) {
+    return Astro.redirect('/404');
+}
+
+const {Content} = await entry.render();
+---
+
+<MainLayout>
+    <BackToAllArticles link="/articles" title="All Articles"/>
+    <article>
+        <h1 class="text-4xl font-bold mb-2">{entry.data.title}</h1>
+        <h3 class="text-lg mb-2">Written by {entry.data.author} on {formatDate(entry.data.pubDate)}</h3>
+        <div class="flex flex-wrap gap-2 mb-6">
+          <Tags tagsArray={entry.data.tags} />
+        </div>
+        <ImageDinamic imgSrc={entry.data.image} alt="Article Image" title="Article Image" classString="w-full h-auto rounded-xl mb-6"/>
+        <Content/>
+    </article>
+</MainLayout>
+
+<style is:global>
+    p {
+        margin: 20px 0;
+    }
+
+    h2 {
+        margin: 25px 0 20px 0;
+        font-size: 1.8rem;
+    }
+</style>

@@ -1,0 +1,8 @@
+---
+let tagsArray: string[] = Astro.props.tagsArray;
+---
+
+{
+    tagsArray.map((tag: string, index: number) => (
+    <span class="px-2 py-1 border text-white rounded-full text-xs mr-2">{tag}</span>))
+    }

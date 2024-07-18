@@ -1,0 +1,20 @@
+---
+import { Image } from "astro:assets";
+import logo from "../images/logo.png";
+import team3 from "../images/team3.png";
+---
+<a href="/" class="flex items-center space-x-3 rtl:space-x-reverse">
+    <Image
+            src={logo}
+            class="h-14"
+            alt="TechPeople Logo"
+            width={55}
+            height={55}
+            widths={[240, 540, 720, team3.width]}
+            loading="eager"
+            sizes={`(max-width: 360px) 240px, (max-width: 720px) 540px, (max-width: 1600px) 720px, ${logo.width}px`}
+    />
+    <span class="self-center text-2xl font-semibold whitespace-nowrap"
+    ><span class="text-indigo-400">Tech</span>People</span
+    >
+</a>
